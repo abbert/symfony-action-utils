@@ -1,0 +1,16 @@
+{
+    "name": "abbert/symfony-action-utils",
+    "description": "Implements all the methods defined in Symfony's ControllerTrait. Can be injected in controllers / actions.",
+    "authors": [
+        {
+            "name": "Albert Bakker",
+            "email": "hello@abbert.nl"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Skrepr\\ActionUtils\\": "src/"
+        }
+    },
+    "require": {}
+}
