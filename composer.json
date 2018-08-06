@@ -12,5 +12,6 @@
             "Skrepr\\ActionUtils\\": "src/"
         }
     },
+    "licence": "MIT",
     "require": {}
 }
