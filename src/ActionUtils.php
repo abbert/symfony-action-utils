@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Twig_Environment;
+use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -17,9 +17,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class ActionUtils implements ActionUtilsInterface
 {
     /**
-     * @var Twig_Environment
+     * @var EngineInterface
      */
-    private $twig;
+    private $templateEngine;
 
     /**
      * @var FormFactoryInterface
@@ -47,14 +47,14 @@ class ActionUtils implements ActionUtilsInterface
     private $tokenStorage;
 
     public function __construct(
-        Twig_Environment $twig,
+        EngineInterface $templateEngine,
         FormFactoryInterface $formFactory,
         Session $session,
         RouterInterface $router,
         Registry $doctrine,
         TokenStorageInterface $tokenStorage
     ) {
-        $this->twig = $twig;
+        $this->templateEngine = $templateEngine;
         $this->formFactory = $formFactory;
         $this->session = $session;
         $this->router = $router;
@@ -66,13 +66,10 @@ class ActionUtils implements ActionUtilsInterface
      * @param string $view
      * @param array $parameters
      * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function render(string $view, array $parameters = []): Response
     {
-        $response = $this->twig->render($view, $parameters);
+        $response = $this->templateEngine->render($view, $parameters);
         return new Response($response);
     }
 
@@ -80,13 +77,10 @@ class ActionUtils implements ActionUtilsInterface
      * @param string $view
      * @param array $parameters
      * @return string
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function renderView(string $view, array $parameters = array()): string
     {
-        return $this->twig->render($view, $parameters);
+        return $this->templateEngine->render($view, $parameters);
     }
 
     /**
@@ -198,3 +192,4 @@ class ActionUtils implements ActionUtilsInterface
         return $user;
     }
 }
+

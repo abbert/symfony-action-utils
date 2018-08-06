@@ -14,9 +14,6 @@ interface ActionUtilsInterface
      * @param string $view
      * @param array $parameters
      * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function render(string $view, array $parameters = []): Response;
 
@@ -24,9 +21,6 @@ interface ActionUtilsInterface
      * @param string $view
      * @param array $parameters
      * @return string
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function renderView(string $view, array $parameters = []): string;
 
@@ -102,3 +96,4 @@ interface ActionUtilsInterface
      */
     public function getUser();
 }
+
